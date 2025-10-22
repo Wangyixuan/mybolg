@@ -3,7 +3,10 @@ import { createClient } from '@supabase/supabase-js'
 import { redirect } from 'next/navigation';
 import { CategoryInfo } from './definitions';
 
-const supabase = createClient('https://ktotndhdxyblhyseaowp.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt0b3RuZGhkeHlibGh5c2Vhb3dwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjAxMzM0MjgsImV4cCI6MjA3NTcwOTQyOH0.IvsrP7tovVT500ZQYrqXgXidLD_4u_I3k84tmcqGXRk')
+const supabase = createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_OR_ANON_KEY!
+)
 
 // 创建文章
 export async function createPost(formData: FormData) {

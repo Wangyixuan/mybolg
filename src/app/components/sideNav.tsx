@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-
+import CustomConnectButton from './CustomConnectButton';
 
 export default function SideNav() {
   return (
@@ -16,7 +16,7 @@ export default function SideNav() {
       </Link>
 
       <div className="flex flex-col items-center justify-center bg-white rounded-lg p-4 shadow-sm gap-5">
-        
+
         <Link href="/list" className="w-full">
           <div className="py-2 px-4 rounded-md text-gray-800 hover:bg-indigo-600 hover:text-white transition-all duration-300 w-full text-center">
             <h2 className="text-lg font-semibold">所有文章</h2>
@@ -28,12 +28,16 @@ export default function SideNav() {
             <h2 className="text-lg font-semibold">文章分类</h2>
           </div>
         </Link>
-        
+
         <Link href="/create" className="w-full">
           <div className="py-2 px-4 rounded-md text-gray-800 hover:bg-indigo-600 hover:text-white transition-all duration-300 w-full text-center">
             <h2 className="text-lg font-semibold">新建文章</h2>
           </div>
         </Link>
+      </div>
+
+      <div className="flex items-center justify-center rounded-lg p-4">
+        <CustomConnectButton />
       </div>
 
     </div>
