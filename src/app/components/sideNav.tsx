@@ -11,7 +11,7 @@ export default function SideNav() {
             <Image src="/logo.svg" alt="logo" width={50} height={50} className="mr-2" />
             <h1 className="text-indigo-700 text-xl font-bold">Welcome</h1>
           </div>
-          <h1 className="text-indigo-900 text-2xl font-bold">Lao Wang's Blog</h1>
+          <h1 className="text-indigo-900 text-2xl font-bold">Lao Wang Blog</h1>
         </div>
       </Link>
 
