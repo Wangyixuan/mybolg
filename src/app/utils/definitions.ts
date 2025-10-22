@@ -13,3 +13,8 @@ export type Category = {
     id: number;
     name: string;
 }
+
+export type CategoryInfo =  {
+    name: string;
+    postCount: number;
+}

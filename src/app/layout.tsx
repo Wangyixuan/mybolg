@@ -16,6 +16,11 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Lao Wang's Blog",
   description: "Lao Wang's Blog by create next app",
+  icons: {
+    icon: "/logo.svg",
+    apple: "/logo.svg",
+    shortcut: "/logo.svg"
+  },
 };
 
 export default function RootLayout({
@@ -26,14 +31,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-pink-50`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-slate-50`}
       >
-        <div className="flex h-screen flex-col md:flex-row md:overflow-hidden">
-          <div className="w-full flex-none md:w-64">
-            <SideNav />
-          </div>
-          <div className="flex-grow p-6 md:overflow-y-auto md:p-12">{children}</div>
+      <div className="flex h-screen flex-col md:flex-row md:overflow-hidden">
+        <div className="w-full flex-none md:w-64 sticky top-0 z-10 bg-slate-50 md:bg-transparent">
+          <SideNav />
         </div>
+        <div className="flex-grow p-4 md:p-6 lg:p-8 md:overflow-y-auto">{children}</div>
+      </div>
       </body>
     </html>
   );
