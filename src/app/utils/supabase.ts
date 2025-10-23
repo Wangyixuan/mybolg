@@ -72,6 +72,7 @@ export async function getLatestPosts() {
         if (error) {
             throw error
         }
+        console.log(data)
         return data
     } catch (error) {
         console.error('Error getting posts:', error)
@@ -269,6 +270,9 @@ export async function getAllCategoryInfo() {
     const posts = await getAllPosts();
     // 统计每个分类下的文章数量
     const categoryInfo: CategoryInfo[] = [];
+    // 未分类
+    const uncategorized: CategoryInfo = {name: '未分类', postCount: 0};
+
     for (const post of posts) {
         if (post.tags && post.tags.length > 0) {
            for (const tag of post.tags) {
@@ -279,10 +283,15 @@ export async function getAllCategoryInfo() {
                     categoryInfo.push({ name: tag, postCount: 1});  
                 }
            }
+        } else {
+            // 未分类文章数量统计
+            uncategorized.postCount++;
         }
     }
     // 按照数量排序 数量多的排第一
     categoryInfo.sort((a, b) => b.postCount - a.postCount);
+    // 确保未分类在最后
+    categoryInfo.push(uncategorized);
     return categoryInfo;
 }
 
