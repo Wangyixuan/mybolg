@@ -17,7 +17,7 @@ export default async function PostCard({ post }: { post: Post }) {
             <Link href={`/detail/${post.id}`} className="block">
                 <h2 className="text-indigo-800 text-xl sm:text-2xl font-bold mb-2 sm:mb-3 hover:text-indigo-600 transition-colors">{post.title}</h2>
                 <div 
-                    className="text-gray-700 text-base sm:text-lg line-clamp-2 mb-2 sm:mb-3 prose-sm prose-indigo"
+                    className="text-gray-700 text-base sm:text-lg line-clamp-2 mb-2 sm:mb-3 prose-sm prose-indigo bg-indigo-50 p-3 rounded-md"
                     dangerouslySetInnerHTML={{ __html: contentHtml || post.content }}
                 />
                 {

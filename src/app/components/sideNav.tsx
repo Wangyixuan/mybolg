@@ -9,9 +9,9 @@ export default function SideNav() {
         <div className="flex flex-col items-center justify-center bg-gradient-to-r from-indigo-50 to-white rounded-lg p-4 shadow-sm hover:shadow-md transition-all">
           <div className="flex items-center justify-center mb-2">
             <Image src="/logo.svg" alt="logo" width={50} height={50} className="mr-2" />
-            <h1 className="text-indigo-700 text-xl font-bold">Welcome</h1>
+            <h1 className="text-indigo-700 text-xl font-bold">WELCOME</h1>
           </div>
-          <h1 className="text-indigo-900 text-2xl font-bold">Lao Wang Blog</h1>
+          <h1 className="text-indigo-900 text-2xl font-bold">Lao Wang の Blog</h1>
         </div>
       </Link>
 
