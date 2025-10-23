@@ -7,9 +7,9 @@ import { useEffect } from 'react';
 export default function DeleteButton({ postId }: { postId: number }) {
   const router = useRouter();
 
-useEffect(() => {
-  router.refresh();
-}, []);
+  useEffect(() => {
+    router.refresh();
+  }, []);
 
   const handleDelete = async () => {
     if (confirm('确定要删除这篇文章吗？')) {

@@ -29,12 +29,14 @@ export default function Create() {
   useEffect(() => {
     setIsFormValid(title.trim() !== '' && content.trim() !== '');
   }, [title, content]);
-  
+
   const submitHandler = async(formData: FormData) => {
     const isSuc = await createPost(formData);
     if (isSuc) {
       router.push('/');
       router.refresh();
+    } else {
+      alert('创建文章失败');
     }
   }
 
