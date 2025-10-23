@@ -1,4 +1,3 @@
-'use server';
 import { createClient } from '@supabase/supabase-js'
 import { redirect } from 'next/navigation';
 import { CategoryInfo } from './definitions';
@@ -55,8 +54,7 @@ export async function createPost(formData: FormData) {
         if (error) {
             throw error
         }
-        // 成功后重定向到首页
-        redirect('/');
+        return true
     } catch (error) {
         console.error('Error creating post:', error)
         throw error
@@ -112,8 +110,6 @@ export async function getPosts(page: number, pageSize: number = 5) {
     }
 }
 
-
-
 // 获取文章详情
 export async function getPostById(id: number) {
     try {
@@ -131,6 +127,84 @@ export async function getPostById(id: number) {
     }
 }
 
+// 删除文章
+export async function deletePostById(id: number) {
+    try {
+        const { data, error } = await supabase
+            .from('posts')
+            .delete()
+            .eq('id', id)
+        if (error) {
+            throw error
+        }
+        
+        return true
+    } catch (error) {
+        console.error('Error deleting post:', error)
+        throw error
+    }
+}
+
+// 更新文章
+export async function updatePost(formData: FormData) {
+    try {
+        const id = formData.get('id');
+        if (!id) {
+            throw new Error('文章ID不能为空');
+        }
+
+        // 获取标签数据并正确处理为 PostgreSQL jsonb[] 格式
+        let tags = [];
+        const selectedTags = formData.get('selectedTags');
+
+        if (selectedTags) {
+            try {
+                // 如果是字符串，尝试解析为数组
+                if (typeof selectedTags === 'string') {
+                    tags = JSON.parse(selectedTags);
+                }
+
+                // 确保 tags 是数组
+                if (!Array.isArray(tags)) {
+                    tags = [tags];
+                }
+            } catch (e) {
+                console.error('Error parsing tags:', e);
+                tags = [];
+            }
+        }
+
+        const customTags = formData.get('customTags');
+        if (customTags && typeof customTags === 'string' && customTags.length > 0) {
+            let customTagArray = customTags.split('#');
+            customTagArray = customTagArray.filter(tag => tag.trim() !== '');
+            // 将自定义标签创建调用createCategory函数
+            await createCategory(customTagArray);
+            // 与tags比较，避免重复
+            tags.push(...customTagArray.filter(tag => !tags.includes(tag)));
+        }
+
+        const { data, error } = await supabase
+            .from('posts')
+            .update({
+                title: formData.get('title'),
+                content: formData.get('content'),
+                tags: tags,
+                updated_at: new Date().toISOString()
+            })
+            .eq('id', id);
+
+        if (error) {
+            throw error;
+        }
+        return true;
+    } catch (error) {
+        console.error('Error updating post:', error);
+        return false;
+    }
+}
+
+
 // 获取所有分类
 export async function getCategories() {
     try {
@@ -140,8 +214,6 @@ export async function getCategories() {
         if (error) {
             throw error
         }
-        console.log(data);
-
         return data
     } catch (error) {
         console.error('Error getting categories:', error)

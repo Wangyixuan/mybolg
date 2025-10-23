@@ -12,6 +12,7 @@ export type Post = {
 export type Category = {
     id: number;
     name: string;
+    isSelected: boolean;
 }
 
 export type CategoryInfo =  {

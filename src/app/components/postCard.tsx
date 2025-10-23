@@ -21,9 +21,9 @@ export default async function PostCard({ post }: { post: Post }) {
                     dangerouslySetInnerHTML={{ __html: contentHtml || post.content }}
                 />
                 {
-                    (post.updated_at && post.updated_at > 0) ?
+                    post.updated_at ?
                         <p className="text-gray-500 text-xs sm:text-sm font-medium">更新于: {new Date(post.updated_at).toLocaleDateString('zh-CN', { year: 'numeric', month: '2-digit', day: '2-digit' }).replace(/\//g, '-')}</p> :
-                        <p className="text-gray-500 text-xs sm:text-sm font-medium">创建于: {new Date(post.created_at).toLocaleDateString('zh-CN', { year: 'numeric', month: '2-digit', day: '2-digit' }).replace(/\//g, '-')}</p>
+                        <p className="text-gray-500 text-xs sm:text-sm font-medium">发布于: {new Date(post.created_at).toLocaleDateString('zh-CN', { year: 'numeric', month: '2-digit', day: '2-digit' }).replace(/\//g, '-')}</p>
                 }
                 <div className="flex flex-wrap gap-1 sm:gap-2 w-full mt-3 sm:mt-4">
                 {post.tags && Array.isArray(post.tags) ?

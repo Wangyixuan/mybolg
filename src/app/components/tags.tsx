@@ -9,6 +9,12 @@ export default function Tags({ tags, onTagsChange }: {
 }) {
     const [selectedTagIds, setSelectedTagIds] = useState<number[]>([]);
 
+// 遍历tags 将isSelected为true的id添加到selectedTagIds中
+    useEffect(() => {
+        const selectedIds = tags.filter(tag => tag.isSelected).map(tag => tag.id);
+        setSelectedTagIds(selectedIds);
+    }, [tags]);
+
     // 当选中标签变化时，通知父组件
     useEffect(() => {
         if (onTagsChange) {
